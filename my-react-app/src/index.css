@@ -1,0 +1,128 @@
+/* src/index.css */
+:root {
+  /* Light Theme Variables (Default) */
+  --background-color: #ffffff;
+  --text-color: #213547;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #646cff;
+  --border-color: #dee2e6;
+  --card-bg-color: #f8f9fa;
+  --card-text-color: #213547;
+  --button-bg-color: #007bff;
+  --button-text-color: #ffffff;
+  --button-hover-bg-color: #0056b3;
+  --input-bg-color: #ffffff;
+  --input-text-color: #495057;
+  --input-border-color: #ced4da;
+  --nav-bg-color: #e9ecef;
+  --nav-text-color: #000000;
+  --link-color: #007bff;
+  --link-hover-color: #0056b3;
+  --positive-change-color: #28a745;
+  --negative-change-color: #dc3545;
+  --table-header-bg: #f8f9fa;
+  --table-row-hover-bg: #f1f1f1;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme Variables */
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #007bff; /* Or a different primary for dark, e.g., #1e90ff */
+  --secondary-color: #adb5bd;
+  --accent-color: #747bff;
+  --border-color: #495057;
+  --card-bg-color: #1e1e1e;
+  --card-text-color: #e0e0e0;
+  --button-bg-color: #007bff;
+  --button-text-color: #ffffff;
+  --button-hover-bg-color: #0056b3; /* Consider a slightly lighter blue for dark theme hover */
+  --input-bg-color: #2c2c2c;
+  --input-text-color: #e0e0e0;
+  --input-border-color: #495057;
+  --nav-bg-color: #1e1e1e;
+  --nav-text-color: #ffffff;
+  --link-color: #6495ed; /* Cornflower blue for better visibility on dark */
+  --link-hover-color: #87cefa; /* Light sky blue for hover */
+  --positive-change-color: #20c997; /* Teal for positive */
+  --negative-change-color: #f08080; /* Light coral for negative */
+  --table-header-bg: #1e1e1e;
+  --table-row-hover-bg: #2c2c2c;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global styles for links, buttons, etc. can be defined here using variables */
+a {
+  font-weight: 500;
+  color: var(--link-color);
+  text-decoration: none; /* Removed inherit, can be added back if specific styling per component is desired */
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--link-hover-color);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent; /* Can use var(--border-color) if themed border is needed */
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.3s ease, color 0.3s ease;
+}
+button:hover:not(:disabled) {
+  border-color: var(--accent-color); /* Example use of accent for border */
+  background-color: var(--button-hover-bg-color);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color; /* Default focus, can be themed */
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color); /* Ensure headings also use theme color */
+}
+
+input, textarea, select {
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  padding: 0.5em;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Example focus shadow */
+}
+
+/* Define any other global styles or resets here */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

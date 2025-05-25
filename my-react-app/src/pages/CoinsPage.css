@@ -1,0 +1,222 @@
+.coins-page {
+  padding: 15px; /* Adjusted padding for smaller screens */
+  font-family: Arial, sans-serif; /* Consider var(--font-family) */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.coins-page h1 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 20px; /* Reduced margin */
+  font-size: 2em; /* Base size */
+}
+
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Reduced margin */
+  padding: 10px; /* Reduced padding */
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s ease, color 0.3s ease;
+  flex-wrap: wrap; /* Allow controls to wrap */
+}
+
+.search-input {
+  padding: 8px 12px; /* Adjusted padding */
+  font-size: 0.95em; /* Adjusted font size */
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  /* width: 300px; */ /* Remove fixed width, allow flex to manage */
+  flex-grow: 1; /* Allow search input to grow */
+  min-width: 200px; /* Minimum width before wrapping/shrinking too much */
+  margin-right: 10px; /* Space between search and sort */
+  margin-bottom: 10px; /* Space when wrapped */
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.sort-options {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Allow sort options to grow */
+  min-width: 280px; /* Ensure label and select fit */
+  margin-bottom: 10px; /* Space when wrapped */
+}
+
+.sort-options label {
+  margin-right: 8px; /* Adjusted margin */
+  font-size: 0.95em; /* Adjusted font size */
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.sort-dropdown {
+  padding: 8px 10px; /* Adjusted padding */
+  font-size: 0.95em; /* Adjusted font size */
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  flex-grow: 1; /* Allow dropdown to fill space in sort-options */
+}
+
+.coins-list {
+  overflow-x: auto; /* Essential for table responsiveness */
+  width: 100%;
+}
+
+.coins-list table {
+  width: 100%;
+  min-width: 600px; /* Minimum width before horizontal scroll becomes very apparent */
+  border-collapse: collapse;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.coins-list th,
+.coins-list td {
+  padding: 10px 12px; /* Adjusted padding */
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease, background-color 0.2s ease, transform 0.2s ease; /* Added transform */
+  font-size: 0.9em; /* Base font size for table content */
+  white-space: nowrap; /* Prevent content wrapping, rely on scroll */
+}
+
+.coins-list th {
+  background-color: var(--table-header-bg);
+  color: var(--text-color);
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.95em;
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable-header:hover {
+  background-color: var(--table-row-hover-bg); 
+}
+
+.coins-list tr:last-child td {
+  border-bottom: none;
+}
+
+.coins-list tr:hover td { /* Apply to td for better visual consistency if row has individual bg */
+  background-color: var(--table-row-hover-bg);
+  transform: scale(1.005); /* Slight scale on row cells for lift effect */
+}
+/* If you want the whole row to scale, apply to tr and manage td backgrounds carefully */
+/* .coins-list tr:hover {
+  background-color: var(--table-row-hover-bg);
+  transform: scale(1.005); This might look odd with individual cell borders 
+} */
+
+
+.coin-icon {
+  width: 20px; /* Slightly smaller icon */
+  height: 20px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.positive-change {
+  color: var(--positive-change-color);
+}
+
+.negative-change {
+  color: var(--negative-change-color);
+}
+
+.coins-page-loading,
+.coins-page-error {
+  text-align: center;
+  font-size: 1.1em; /* Adjusted font size */
+  padding: 40px; /* Adjusted padding */
+  color: var(--text-color); 
+}
+
+.coins-page-error {
+  color: var(--negative-change-color); 
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .coins-page {
+    padding: 10px;
+  }
+  .coins-page h1 {
+    font-size: 1.7em;
+  }
+  .controls-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    width: 100%; 
+    box-sizing: border-box; 
+    margin-right: 0; /* Remove margin when stacked */
+    margin-bottom: 10px;
+  }
+
+  .sort-options {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0; /* Remove bottom margin if it's the last item */
+  }
+  
+  .sort-dropdown {
+    flex-grow: 1;
+  }
+
+  .coins-list th, .coins-list td {
+    font-size: 0.85em; /* Smaller font for table content on tablets */
+    padding: 8px 10px;
+  }
+  .coin-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .coins-page h1 {
+    font-size: 1.5em;
+  }
+  .search-input, .sort-dropdown, .sort-options label {
+    font-size: 0.9em; /* Further reduce font size for controls */
+  }
+  .coins-list th, .coins-list td {
+    font-size: 0.8em; /* Even smaller font for table on mobile */
+    padding: 6px 8px;
+  }
+  .coin-icon {
+    width: 16px;
+    height: 16px;
+  }
+  /* Optional: Hide less critical columns on very small screens if needed */
+  /* e.g., .coins-list th:nth-child(X), .coins-list td:nth-child(X) { display: none; } */
+}

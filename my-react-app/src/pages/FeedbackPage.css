@@ -1,0 +1,169 @@
+.feedback-page {
+  max-width: 600px;
+  margin: 20px auto; /* Reduced top/bottom margin */
+  padding: 20px; /* Reduced padding */
+  background-color: var(--card-bg-color); 
+  color: var(--card-text-color); 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  font-family: Arial, sans-serif; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 90%; /* Ensure it doesn't touch screen edges on small devices */
+  box-sizing: border-box;
+}
+
+.feedback-page h1 {
+  text-align: center;
+  color: var(--text-color); 
+  margin-bottom: 20px; /* Reduced margin */
+  font-size: 1.8em; /* Base size */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px; /* Reduced margin */
+  font-weight: bold;
+  color: var(--text-color); 
+  font-size: 0.95em; /* Base size */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px; /* Adjusted padding */
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 0.95em; /* Base size */
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); 
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 90px; /* Adjusted min-height */
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+  border-color: var(--negative-change-color); 
+}
+
+.error-message {
+  display: block;
+  color: var(--negative-change-color); 
+  font-size: 0.85em; /* Adjusted font size */
+  margin-top: 4px; /* Adjusted margin */
+}
+
+button[type="submit"] {
+  /* Global styles from index.css are mostly fine */
+  /* Ensure full width for consistency in this form */
+  width: 100%;
+  padding: 10px 15px; /* Adjusted padding */
+  font-size: 1em; /* Base size */
+}
+
+/* Disabled state is handled globally */
+
+.submit-notification {
+  margin-top: 15px; /* Reduced margin */
+  padding: 12px; /* Adjusted padding */
+  border-radius: 5px;
+  font-size: 0.9em; /* Base size */
+  text-align: center;
+  border: 1px solid transparent; 
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.submit-notification.success {
+  background-color: var(--positive-change-color); 
+  color: var(--button-text-color); 
+  border-color: var(--positive-change-color);
+}
+
+.submit-notification.error {
+  background-color: var(--negative-change-color); 
+  color: var(--button-text-color); 
+  border-color: var(--negative-change-color);
+}
+
+/* Media Queries for FeedbackPage */
+@media (max-width: 768px) {
+  .feedback-page {
+    margin: 20px 5%; /* Adjust margin for tablets */
+    width: 90%;
+    padding: 15px;
+  }
+  .feedback-page h1 {
+    font-size: 1.6em;
+  }
+  .form-group label {
+    font-size: 0.9em;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group textarea {
+    font-size: 0.9em;
+    padding: 9px;
+  }
+  button[type="submit"] {
+    font-size: 0.95em;
+  }
+  .submit-notification {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .feedback-page {
+    margin: 15px auto; /* Center on very small screens */
+    width: 95%; /* Use more width */
+    padding: 10px;
+  }
+  .feedback-page h1 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+  }
+  .form-group {
+    margin-bottom: 12px;
+  }
+  .form-group label {
+    font-size: 0.85em;
+    margin-bottom: 4px;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group textarea {
+    font-size: 0.85em;
+    padding: 8px;
+  }
+  .form-group textarea {
+    min-height: 80px;
+  }
+  .error-message {
+    font-size: 0.8em;
+  }
+  button[type="submit"] {
+    font-size: 0.9em;
+    padding: 9px 12px;
+  }
+  .submit-notification {
+    font-size: 0.8em;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,169 @@
+/* src/App.css */
+.app-container {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Needed for absolute positioning of pages during transition */
+  overflow-x: hidden; /* Prevent scrollbars during slide transitions if used */
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--nav-bg-color);
+  color: var(--nav-text-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  flex-wrap: wrap; 
+  position: relative; /* Ensure nav stays above transitioning content if needed */
+  z-index: 100; /* Higher z-index for nav */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center; 
+  flex-wrap: wrap; 
+}
+
+nav ul li {
+  margin-right: 15px; 
+  margin-bottom: 5px; 
+  margin-top: 5px; 
+}
+
+nav ul li:last-child {
+  margin-right: 0;
+}
+
+nav ul li a {
+  color: var(--nav-text-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem; 
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: block; 
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--link-hover-color);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9em;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--border-color); 
+  border-radius: 5px;
+  cursor: pointer; 
+  margin-left: auto; 
+  margin-top: 5px; 
+  margin-bottom: 5px; 
+}
+
+.theme-toggle-button:hover {
+  background-color: var(--button-hover-bg-color);
+  border-color: var(--accent-color);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 0;
+  transition: border-color 0.3s ease;
+}
+
+/* Main content area and Page Transitions */
+.content-area {
+  flex-grow: 1;
+  padding: 1rem; /* Padding is on the content-area */
+  width: 100%;
+  box-sizing: border-box;
+  position: relative; /* Needed for CSSTransition to correctly apply transforms */
+}
+
+/* Page Fade Transition */
+.page-fade-enter {
+  opacity: 0;
+  transform: scale(0.98) translateY(10px); /* Slight scale and slide up */
+}
+.page-fade-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+.page-fade-exit {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.page-fade-exit-active {
+  opacity: 0;
+  transform: scale(0.98) translateY(-10px); /* Slight scale and slide down */
+  transition: opacity 400ms ease-in, transform 400ms ease-in;
+}
+
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column; 
+    align-items: stretch; 
+    padding: 1rem;
+  }
+
+  nav ul {
+    flex-direction: column; 
+    width: 100%; 
+    align-items: stretch; 
+    margin-bottom: 1rem; 
+  }
+
+  nav ul li {
+    margin-right: 0; 
+    margin-bottom: 0.5rem; 
+  }
+  
+  nav ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  nav ul li a {
+    text-align: center; 
+    padding: 0.75rem; 
+  }
+
+  .theme-toggle-button {
+    width: 100%; 
+    margin-left: 0; 
+    text-align: center;
+  }
+  .content-area {
+    padding: 0.8rem; /* Slightly reduce padding for content on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 0.5rem;
+  }
+  nav ul li a {
+    font-size: 0.95em; 
+  }
+  .theme-toggle-button {
+    font-size: 0.85em;
+  }
+  .content-area {
+    padding: 0.5rem; /* Further reduce padding for content on mobile */
+  }
+}

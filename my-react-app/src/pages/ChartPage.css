@@ -1,0 +1,94 @@
+.chart-page {
+  padding: 15px; /* Adjusted padding */
+  font-family: Arial, sans-serif; 
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chart-page h1 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 20px; /* Reduced margin */
+  font-size: 1.8em; /* Base size */
+}
+
+.chart-container {
+  width: 90%; /* Use percentage for better scaling */
+  max-width: 1000px; /* Maintain max width */
+  /* height: 400px; */ /* Remove fixed height, use aspect ratio or min/max height */
+  min-height: 250px; /* Minimum height to ensure chart is usable */
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio, e.g., 16:9 or 2:1 */
+  max-height: 500px; /* Optional: constrain max height if aspect ratio makes it too tall */
+  margin: 0 auto;
+  padding: 15px; /* Adjusted padding */
+  background-color: var(--card-bg-color); 
+  color: var(--card-text-color); 
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex; /* Use flex to help center canvas if needed */
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container canvas {
+  /* width and height !important are handled by Chart.js if maintainAspectRatio is false */
+  /* If maintainAspectRatio is true (default), canvas dimensions drive container */
+  max-width: 100%; /* Ensure canvas does not overflow its container */
+  max-height: 100%; /* Ensure canvas does not overflow its container */
+}
+
+.chart-page-loading,
+.chart-page-error {
+  text-align: center;
+  font-size: 1.1em; /* Adjusted font size */
+  padding: 40px; /* Adjusted padding */
+  color: var(--text-color); 
+  width: 100%;
+}
+
+.chart-page-error {
+  color: var(--negative-change-color); 
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .chart-page {
+    padding: 10px;
+  }
+  .chart-page h1 {
+    font-size: 1.6em; /* Smaller title for tablets */
+    margin-bottom: 15px;
+  }
+  .chart-container {
+    width: 95%; /* More width on tablets */
+    padding: 10px;
+    min-height: 200px; /* Adjust min height */
+    /* Aspect ratio will adjust height relative to width */
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-page h1 {
+    font-size: 1.4em; /* Smaller title for mobile */
+  }
+  .chart-container {
+    width: 98%; /* Almost full width on mobile */
+    padding: 5px;
+    min-height: 180px; /* Further adjust min height */
+    aspect-ratio: 1 / 1; /* Make it square on very small screens if preferred */
+                         /* or adjust aspect-ratio: 4 / 3; for a more common mobile chart shape */
+  }
+  .chart-page-loading,
+  .chart-page-error {
+    font-size: 1em;
+    padding: 30px;
+  }
+}

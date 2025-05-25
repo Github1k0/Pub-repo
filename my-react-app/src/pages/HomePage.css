@@ -1,0 +1,187 @@
+.home-page {
+  font-family: Arial, sans-serif; /* Consider using var(--font-family) if defined globally */
+  color: var(--text-color);
+  background-color: var(--background-color); /* Ensure page background uses theme */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hero Banner Styles */
+.hero-banner {
+  position: relative;
+  min-height: 60vh; /* Use min-height for flexibility */
+  max-height: 80vh;
+  padding: 20px; /* Add padding for content */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--button-text-color); /* Text on hero is typically light */
+  overflow: hidden;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay remains dark for contrast */
+  padding: 20px; /* Adjusted padding */
+  border-radius: 10px;
+  max-width: 90%; /* Use percentage for responsiveness */
+  box-sizing: border-box;
+}
+
+.hero-content h1 {
+  font-size: 2.5em; /* Base size */
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  color: inherit; 
+}
+
+.hero-content p {
+  font-size: 1.2em; /* Base size */
+  margin-bottom: 1.5em;
+  color: inherit; 
+}
+
+.cta-button {
+  padding: 10px 20px; /* Adjusted padding */
+  font-size: 1em; /* Adjusted font size */
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
+  border: none; 
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+/* About Us Section Styles */
+.about-section {
+  padding: 40px 15px; /* Adjusted padding */
+  text-align: center;
+  background-color: var(--card-bg-color); 
+  color: var(--card-text-color);
+  min-height: auto; /* Remove fixed min-height */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.about-section h2 {
+  font-size: 2em; /* Adjusted font size */
+  margin-bottom: 0.75em;
+  color: var(--text-color); 
+}
+
+.about-section p {
+  font-size: 1em; /* Adjusted font size */
+  line-height: 1.6;
+  max-width: 90%; /* Use percentage */
+  margin: 0 auto 1em auto;
+  color: var(--text-color); 
+}
+
+/* Parallax Section Styles */
+.parallax-section {
+  position: relative;
+  min-height: 50vh; /* Use min-height */
+  max-height: 70vh;
+  padding: 20px; /* Add padding for content */
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--button-text-color); 
+  overflow: hidden;
+}
+
+.parallax-content {
+  background-color: rgba(0, 0, 0, 0.6); 
+  padding: 20px; /* Adjusted padding */
+  border-radius: 10px;
+  max-width: 90%; /* Use percentage */
+  box-sizing: border-box;
+}
+
+.parallax-content h2 {
+  font-size: 2.2em; /* Adjusted font size */
+  margin-bottom: 0.5em;
+  color: inherit; 
+}
+
+.parallax-content p {
+  font-size: 1.1em; /* Adjusted font size */
+  color: inherit; 
+}
+
+/* Media Queries for HomePage */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2em; /* Smaller for tablets */
+  }
+  .hero-content p {
+    font-size: 1.1em; /* Smaller for tablets */
+  }
+  .cta-button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+  .about-section h2 {
+    font-size: 1.8em;
+  }
+  .about-section p {
+    font-size: 0.95em;
+  }
+  .parallax-content h2 {
+    font-size: 1.9em;
+  }
+  .parallax-content p {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-banner {
+    min-height: 50vh; /* Adjust height for mobile */
+  }
+  .hero-content {
+    padding: 15px;
+  }
+  .hero-content h1 {
+    font-size: 1.6em; /* Smaller for mobile */
+  }
+  .hero-content p {
+    font-size: 1em; /* Smaller for mobile */
+    margin-bottom: 1em;
+  }
+  .cta-button {
+    font-size: 0.85em;
+    padding: 8px 14px;
+  }
+  .about-section {
+    padding: 30px 10px;
+  }
+  .about-section h2 {
+    font-size: 1.6em;
+  }
+  .about-section p {
+    font-size: 0.9em;
+    max-width: 95%;
+  }
+  .parallax-section {
+    min-height: 40vh; /* Adjust height for mobile */
+  }
+  .parallax-content {
+    padding: 15px;
+  }
+  .parallax-content h2 {
+    font-size: 1.7em;
+  }
+  .parallax-content p {
+    font-size: 0.95em;
+  }
+}

@@ -67,9 +67,15 @@ nav ul li a.active {
   border: 1px solid var(--border-color); 
   border-radius: 5px;
   cursor: pointer; 
-  margin-left: auto; 
+  margin-left: auto; /* This might need to be removed if nav-controls handles alignment */
   margin-top: 5px; 
   margin-bottom: 5px; 
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between LanguageSwitcher and ThemeToggle */
 }
 
 .theme-toggle-button:hover {
@@ -143,13 +149,22 @@ hr {
     padding: 0.75rem; 
   }
 
+  .nav-controls {
+    flex-direction: column; /* Stack controls */
+    width: 100%;
+    gap: 0.5rem; /* Reduce gap when stacked */
+    margin-top: 0.5rem; /* Space from nav links */
+  }
+
   .theme-toggle-button {
     width: 100%; 
     margin-left: 0; 
     text-align: center;
   }
+  /* LanguageSwitcher itself will also be full width due to its container */
+
   .content-area {
-    padding: 0.8rem; /* Slightly reduce padding for content on tablets */
+    padding: 0.8rem; 
   }
 }
 
@@ -163,7 +178,10 @@ hr {
   .theme-toggle-button {
     font-size: 0.85em;
   }
+  .nav-controls {
+    gap: 0.4rem;
+  }
   .content-area {
-    padding: 0.5rem; /* Further reduce padding for content on mobile */
+    padding: 0.5rem; 
   }
 }

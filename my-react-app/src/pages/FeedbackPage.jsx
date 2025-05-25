@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import './FeedbackPage.css'; // We will create this file for styling
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+import './FeedbackPage.css'; 
 
 function FeedbackPage() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,9 +12,9 @@ function FeedbackPage() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // null, 'success', or 'error'
+  const [submitStatus, setSubmitStatus] = useState(null); 
   const [submitMessage, setSubmitMessage] = useState('');
-  const notificationRef = useRef(null); // Ref for the notification element
+  const notificationRef = useRef(null); 
 
   useEffect(() => {
     if (submitMessage && notificationRef.current) {
@@ -28,33 +30,38 @@ function FeedbackPage() {
     let tempErrors = {};
     let isValid = true;
 
-    // Name validation
     if (!formData.name.trim()) {
-      tempErrors.name = 'Name is required.';
+      tempErrors.name = t('feedback_validation_name_required');
       isValid = false;
     } else if (formData.name.trim().length <= 2) {
-      tempErrors.name = 'Name must be more than 2 characters.';
+      tempErrors.name = t('feedback_validation_name_length');
       isValid = false;
     }
 
-    // Email validation
     if (!formData.email.trim()) {
-      tempErrors.email = 'Email is required.';
+      tempErrors.email = t('feedback_validation_email_required');
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      tempErrors.email = 'Email is not valid.';
+      tempErrors.email = t('feedback_validation_email_invalid');
       isValid = false;
     }
 
-    // Message validation
     if (!formData.message.trim()) {
-      tempErrors.message = 'Message is required.';
+      tempErrors.message = t('feedback_validation_message_required');
       isValid = false;
     }
 
     setErrors(tempErrors);
     return isValid;
   };
+  
+  // Re-run validation when language changes to update error messages
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) { // Only if there are existing errors
+        validate();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]); // Dependency on t function (which changes with language)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +69,6 @@ function FeedbackPage() {
       ...formData,
       [name]: value,
     });
-    // Optionally, re-validate on change after initial submit attempt or blur
     if (Object.keys(errors).length > 0) {
         validate();
     }
@@ -79,49 +85,47 @@ function FeedbackPage() {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
           method: 'POST',
           body: JSON.stringify({
-            title: `Feedback from ${formData.name}`, // JSONPlaceholder expects a title
+            title: `Feedback from ${formData.name}`, 
             body: formData.message,
-            userId: 1, // JSONPlaceholder expects a userId
-            email: formData.email // Custom field
+            userId: 1, 
+            email: formData.email 
           }),
           headers: {
             'Content-type': 'application/json; charset=UTF-G',
           },
         });
 
-        if (response.ok || response.status === 201) { // 201 is Created
+        if (response.ok || response.status === 201) { 
           setSubmitStatus('success');
-          setSubmitMessage('Feedback submitted successfully!');
-          setFormData({ name: '', email: '', message: '' }); // Reset form
+          setSubmitMessage(t('feedback_submit_success'));
+          setFormData({ name: '', email: '', message: '' }); 
           setErrors({});
         } else {
           const errorData = await response.json().catch(() => null);
           setSubmitStatus('error');
-          setSubmitMessage(`Failed to submit feedback. Server responded with ${response.status}. ${errorData?.message || ''}`);
+          setSubmitMessage(t('feedback_submit_error_server', { status: response.status, message: errorData?.message || '' }));
         }
       } catch (error) {
         setSubmitStatus('error');
-        setSubmitMessage(`Failed to submit feedback: ${error.message}`);
+        setSubmitMessage(t('feedback_submit_error_network', { message: error.message }));
       } finally {
         setIsSubmitting(false);
       }
     }
   };
   
-  // Effect to disable submit button if form is invalid
   const [isFormValid, setIsFormValid] = useState(false);
   useEffect(() => {
     setIsFormValid(validate());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData]);
-
+  }, [formData, t]); // Add t to dependency array for isFormValid as validate now uses t
 
   return (
     <div className="feedback-page">
-      <h1>Submit Your Feedback</h1>
+      <h1>{t('feedback_page_title')}</h1>
       <form onSubmit={handleSubmit} noValidate>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">{t('feedback_label_name')}</label>
           <input
             type="text"
             id="name"
@@ -134,7 +138,7 @@ function FeedbackPage() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">{t('feedback_label_email')}</label>
           <input
             type="email"
             id="email"
@@ -147,7 +151,7 @@ function FeedbackPage() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="message">Message:</label>
+          <label htmlFor="message">{t('feedback_label_message')}</label>
           <textarea
             id="message"
             name="message"
@@ -160,15 +164,13 @@ function FeedbackPage() {
         </div>
 
         <button type="submit" disabled={!isFormValid || isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
+          {isSubmitting ? t('feedback_button_submitting') : t('feedback_button_submit')}
         </button>
 
         {submitMessage && (
           <div 
             ref={notificationRef} 
             className={`submit-notification ${submitStatus === 'success' ? 'success' : 'error'}`}
-            // Initial style set by CSS or to avoid flash of unstyled content (FOUC)
-            // style={{ opacity: 0 }} 
           >
             {submitMessage}
           </div>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import './CoinsPage.css'; // We will create this file for styling
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+import './CoinsPage.css';
 
 function CoinsPage() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +30,7 @@ function CoinsPage() {
         );
         setCoins(response.data);
       } catch (err) {
-        setError(err.message || 'Failed to fetch data');
+        setError(err.message || 'Failed to fetch data'); // Keep generic error message here, translate prefix
         console.error('Error fetching coin data:', err);
       } finally {
         setIsLoading(false);
@@ -47,8 +49,6 @@ function CoinsPage() {
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
       direction = 'desc';
     } else if (sortConfig.key === key && sortConfig.direction === 'desc') {
-      // Optional: third click resets to default (market_cap desc) or removes sorting
-      // For now, it will just toggle between asc/desc for the same key
       direction = 'asc'; 
     }
     setSortConfig({ key, direction });
@@ -76,27 +76,27 @@ function CoinsPage() {
 
 
   if (isLoading) {
-    return <div className="coins-page-loading">Loading cryptocurrency data...</div>;
+    return <div className="coins-page-loading">{t('coins_loading')}</div>;
   }
 
   if (error) {
-    return <div className="coins-page-error">Error: {error}</div>;
+    return <div className="coins-page-error">{t('coins_error_prefix')}{error}</div>;
   }
 
   return (
     <div className="coins-page">
-      <h1>Cryptocurrency Market</h1>
+      <h1>{t('coins_page_title')}</h1>
       
       <div className="controls-container">
         <input
           type="text"
-          placeholder="Search by name or symbol..."
+          placeholder={t('coins_search_placeholder')}
           value={searchTerm}
           onChange={handleSearchChange}
           className="search-input"
         />
         <div className="sort-options">
-          <label htmlFor="sort-select">Sort by: </label>
+          <label htmlFor="sort-select">{t('coins_sort_label')}</label>
           <select 
             id="sort-select"
             onChange={(e) => {
@@ -106,12 +106,12 @@ function CoinsPage() {
             value={`${sortConfig.key}_${sortConfig.direction}`}
             className="sort-dropdown"
           >
-            <option value="market_cap_desc">Market Cap (High to Low)</option>
-            <option value="market_cap_asc">Market Cap (Low to High)</option>
-            <option value="current_price_desc">Price (High to Low)</option>
-            <option value="current_price_asc">Price (Low to High)</option>
-            <option value="price_change_percentage_24h_desc">24h Change (High to Low)</option>
-            <option value="price_change_percentage_24h_asc">24h Change (Low to High)</option>
+            <option value="market_cap_desc">{t('coins_sort_market_cap_desc')}</option>
+            <option value="market_cap_asc">{t('coins_sort_market_cap_asc')}</option>
+            <option value="current_price_desc">{t('coins_sort_price_desc')}</option>
+            <option value="current_price_asc">{t('coins_sort_price_asc')}</option>
+            <option value="price_change_percentage_24h_desc">{t('coins_sort_change_desc')}</option>
+            <option value="price_change_percentage_24h_asc">{t('coins_sort_change_asc')}</option>
           </select>
         </div>
       </div>
@@ -121,20 +121,20 @@ function CoinsPage() {
           <table>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Icon</th>
+                <th>{t('coins_header_rank')}</th>
+                <th>{t('coins_header_icon')}</th>
                 <th onClick={() => requestSort('name')} className="sortable-header">
-                  Name {sortConfig.key === 'name' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
+                  {t('coins_header_name')} {sortConfig.key === 'name' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
                 </th>
-                <th>Symbol</th>
+                <th>{t('coins_header_symbol')}</th>
                 <th onClick={() => requestSort('current_price')} className="sortable-header">
-                  Price {sortConfig.key === 'current_price' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
+                  {t('coins_header_price')} {sortConfig.key === 'current_price' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
                 </th>
                 <th onClick={() => requestSort('market_cap')} className="sortable-header">
-                  Market Cap {sortConfig.key === 'market_cap' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
+                  {t('coins_header_market_cap')} {sortConfig.key === 'market_cap' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
                 </th>
                 <th onClick={() => requestSort('price_change_percentage_24h')} className="sortable-header">
-                  24h Change {sortConfig.key === 'price_change_percentage_24h' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
+                  {t('coins_header_24h_change')} {sortConfig.key === 'price_change_percentage_24h' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
                 </th>
               </tr>
             </thead>
@@ -155,7 +155,7 @@ function CoinsPage() {
             </tbody>
           </table>
         ) : (
-          <p>No coins found matching your criteria.</p>
+          <p>{t('coins_no_results')}</p>
         )}
       </div>
     </div>

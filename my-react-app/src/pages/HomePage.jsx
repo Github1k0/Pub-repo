@@ -1,19 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import './HomePage.css'; // We will create this file for styling
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+import './HomePage.css'; 
 
-// Placeholder hero image (replace with an actual image URL or import)
+// Placeholder hero image
 const heroImageUrl = 'https://via.placeholder.com/1920x1080.png?text=Hero+Banner';
 const parallaxImageUrl = 'https://via.placeholder.com/1920x1080.png?text=Parallax+Background';
 
 function HomePage() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const heroBannerRef = useRef(null);
   const parallaxSectionRef = useRef(null);
 
   useEffect(() => {
-    // Animate title and subtitle
     gsap.fromTo(
       titleRef.current,
       { opacity: 0, y: -50 },
@@ -37,15 +38,12 @@ function HomePage() {
     const handleScroll = () => {
       if (parallaxSectionRef.current) {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        // Adjust the '0.5' factor to change the speed of the parallax effect
         parallaxSectionRef.current.style.backgroundPositionY = `${scrollTop * 0.5}px`;
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
 
   return (
     <div className="home-page">
@@ -55,34 +53,19 @@ function HomePage() {
         style={{ backgroundImage: `url(${heroImageUrl})` }}
       >
         <div className="hero-content">
-          <h1 ref={titleRef}>Welcome to CryptoDash</h1>
-          <p ref={subtitleRef}>Your one-stop platform for cryptocurrency tracking and analysis.</p>
+          <h1 ref={titleRef}>{t('home_hero_title')}</h1>
+          <p ref={subtitleRef}>{t('home_hero_subtitle')}</p>
           <button onClick={handleScrollToAbout} className="cta-button">
-            Learn More
+            {t('home_hero_cta')}
           </button>
         </div>
       </section>
 
       <section id="about-section" className="about-section">
-        <h2>About Us</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <h2>{t('home_about_title')}</h2>
+        <p>{t('home_about_p1')}</p>
+        <p>{t('home_about_p2')}</p>
+        <p>{t('home_about_p3')}</p>
       </section>
 
       <section
@@ -91,8 +74,8 @@ function HomePage() {
         style={{ backgroundImage: `url(${parallaxImageUrl})` }}
       >
         <div className="parallax-content">
-          <h2>Discover More Features</h2>
-          <p>Explore advanced charting tools and real-time data.</p>
+          <h2>{t('home_parallax_title')}</h2>
+          <p>{t('home_parallax_subtitle')}</p>
         </div>
       </section>
     </div>
